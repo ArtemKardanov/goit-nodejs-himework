@@ -1,1 +1,1 @@
-# goit-nodejs-himework
+# goit-nodejs-homework
