@@ -1,1 +1,1 @@
-# goit-nodejs-homework
+# 01-node-basics
