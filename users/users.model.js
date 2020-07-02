@@ -20,6 +20,14 @@ class User {
     return this.user.find(query, { password: false });
   };
 
+  getUserByid = (id) => {
+    return this.user.findById(id);
+  };
+
+  updateToken = (id, token) => {
+    return this.user.findByIdAndUpdate(id, { token });
+  };
+
   createUser = (user) => {
     return this.user.create(user);
   };

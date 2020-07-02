@@ -5,6 +5,4 @@ const LoginValidation = Joi.object({
   password: Joi.string().required(),
 });
 
-module.exports = {
-  LoginValidation,
-};
+module.exports = LoginValidation;

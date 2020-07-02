@@ -14,15 +14,10 @@ const { contactValidateMiddleware } = require("./contact.validator");
 
 const contactsRouter = express.Router();
 
-contactsRouter.get("/", tokenMiddleware, getContactsController);
-contactsRouter.get("/:contactId", tokenMiddleware, getContactByidController);
-contactsRouter.post(
-  "/",
-  tokenMiddleware,
-  contactValidateMiddleware,
-  createContactController
-);
-contactsRouter.delete("/:contactId", tokenMiddleware, deleteContactController);
-contactsRouter.patch("/:contactId", tokenMiddleware, updateUserController);
+contactsRouter.get("/", getContactsController);
+contactsRouter.get("/:contactId", getContactByidController);
+contactsRouter.post("/", contactValidateMiddleware, createContactController);
+contactsRouter.delete("/:contactId", deleteContactController);
+contactsRouter.patch("/:contactId", updateUserController);
 
-module.exports.contactsRouter = contactsRouter;
+module.exports = contactsRouter;

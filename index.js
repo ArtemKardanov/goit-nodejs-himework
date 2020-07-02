@@ -3,8 +3,9 @@ const morgan = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-const { contactsRouter } = require("./contacts/contacts.router");
-const { authRouter } = require("./auth/auth.router");
+const contactsRouter = require("./contacts/contacts.router");
+const authRouter = require("./auth/auth.router");
+const userRouter = require("./users/users.router");
 
 const PORT = 3002;
 
@@ -26,8 +27,9 @@ const runServer = async () => {
     app.use(morgan("combined"));
     app.use(express.json());
 
-    app.use("/auth", authRouter);
     app.use("/contacts", contactsRouter);
+    app.use("/auth", authRouter);
+    app.use("/users", userRouter);
 
     app.listen(PORT, () => {
       console.log(`Server is listening on ${PORT} port.`);

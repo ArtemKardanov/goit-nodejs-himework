@@ -1,16 +1,16 @@
 const { Router } = require("express");
-const { contactValidateMiddleware } = require("../contacts/contact.validator");
+const tokenMiddleware = require("../middlewares/auth.middleware");
 const {
   registrationController,
   loginController,
+  logoutController,
 } = require("./auth.controller");
+const LoginValidation = require("./auth.validator");
 
 const authRouter = Router();
 
 authRouter.post("/register", registrationController);
 authRouter.post("/login", loginController);
-authRouter.post("/logout");
+authRouter.post("/logout", tokenMiddleware, logoutController);
 
-module.exports = {
-  authRouter,
-};
+module.exports = authRouter;

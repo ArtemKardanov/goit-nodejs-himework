@@ -18,6 +18,4 @@ const tokenMiddleware = async (req, res) => {
   }
 };
 
-module.exports = {
-  tokenMiddleware,
-};
+module.exports = tokenMiddleware;

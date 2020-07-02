@@ -77,9 +77,24 @@ const loginController = async (req, res) => {
   }
 };
 
-const logoutController = async (req, res) => {};
+const logoutController = async (req, res) => {
+  try {
+    const user = req.user;
+
+    if (!user) {
+      res.status(401).send("Not authorized");
+      return;
+    }
+    await User.updateToken(user._id, null);
+
+    res.status(204).send("No content");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = {
-  registrationController,
-  loginController,
+  registrationController: registrationController,
+  loginController: loginController,
+  logoutController: logoutController,
 };
