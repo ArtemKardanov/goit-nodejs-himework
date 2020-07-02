@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const contactSchema = new mongoose.Schema({
-  name: String,
-  phone: Number,
   email: String,
+  name: String,
+  phone: String,
 });
 
 class Contact {
@@ -11,8 +11,8 @@ class Contact {
     this.contact = mongoose.model("Contact", contactSchema);
   }
 
-  getContacts = () => {
-    return this.contact.find();
+  getContacts = (contact) => {
+    return this.contact.find(contact);
   };
 
   createContact = (contact) => {

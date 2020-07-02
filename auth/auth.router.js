@@ -7,8 +7,9 @@ const {
 
 const authRouter = Router();
 
-authRouter.post("/register", contactValidateMiddleware, registrationController);
+authRouter.post("/register", registrationController);
 authRouter.post("/login", loginController);
+authRouter.post("/logout");
 
 module.exports = {
   authRouter,

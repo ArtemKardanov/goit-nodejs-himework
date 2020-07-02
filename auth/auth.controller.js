@@ -1,4 +1,4 @@
-const { Contact } = require("../contacts/contacts.model");
+const { User } = require("../users/users.model");
 const { LoginValidation } = require("./auth.validator");
 const { createToken } = require("../services/auth.service");
 const bcrypt = require("bcrypt");
@@ -14,7 +14,7 @@ const registrationController = async (req, res) => {
     }
 
     const { email, password } = req.body;
-    const emailExist = await Contact.getContacts({ email });
+    const emailExist = await User.getContacts({ email });
 
     if (emailExist) {
       res.status(409).send("Email in use");
@@ -23,7 +23,7 @@ const registrationController = async (req, res) => {
       const hashPassword = await bcrypt.hash(password, salt);
       const contact = { ...req.body, password: hashPassword };
 
-      await Contact.createContact(contact);
+      await User.createContact(contact);
 
       res.status(201).json({
         user: {
@@ -46,7 +46,7 @@ const loginController = async (req, res) => {
     }
 
     const { email, password } = req.body;
-    const contactExist = await Contact.getContacts({ email });
+    const contactExist = await User.getContacts({ email });
 
     if (!contactExist) {
       res.status(401).send("Email is wrong");
@@ -63,7 +63,7 @@ const loginController = async (req, res) => {
       return;
     }
 
-    const token = await createToken({ id: user._id });
+    const token = await createToken(user._id);
 
     res.status(200).json({
       token,
@@ -76,6 +76,8 @@ const loginController = async (req, res) => {
     res.status(500).send("Inrernal server error");
   }
 };
+
+const logoutController = async (req, res) => {};
 
 module.exports = {
   registrationController,
