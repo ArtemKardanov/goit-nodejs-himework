@@ -8,7 +8,9 @@ const {
   updateUserController,
 } = require("./contacts.controller");
 
+
 const { tokenMiddleware } = require("../middlewares/auth.middleware");
+
 
 const { contactValidateMiddleware } = require("./contact.validator");
 
@@ -20,4 +22,7 @@ contactsRouter.post("/", contactValidateMiddleware, createContactController);
 contactsRouter.delete("/:contactId", deleteContactController);
 contactsRouter.patch("/:contactId", updateUserController);
 
+
 module.exports = contactsRouter;
+
+

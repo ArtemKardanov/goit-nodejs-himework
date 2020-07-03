@@ -1,3 +1,4 @@
+
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -37,7 +38,9 @@ const runServer = async () => {
   } catch (error) {
     console.log(error);
     process.exit(1);
+
   }
 };
+
 
 runServer();
