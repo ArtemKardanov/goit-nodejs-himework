@@ -30,6 +30,7 @@ const runServer = async () => {
     app.use("/contacts", contactsRouter);
     app.use("/auth", authRouter);
     app.use("/users", userRouter);
+    app.use("/images", express.static("./static/images"));
 
     app.listen(PORT, () => {
       console.log(`Server is listening on ${PORT} port.`);

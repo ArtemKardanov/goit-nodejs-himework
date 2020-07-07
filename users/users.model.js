@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   email: String,
   password: String,
+  avatarURL: String,
   subscription: {
     type: String,
     enum: ["free", "pro", "premium"],
@@ -31,8 +32,10 @@ class User {
   createUser = (user) => {
     return this.user.create(user);
   };
+
+  getUserByEmail = (email) => {
+    return this.user.findOne({ email });
+  };
 }
 
-module.exports = {
-  User: new User(),
-};
+module.exports = new User();
