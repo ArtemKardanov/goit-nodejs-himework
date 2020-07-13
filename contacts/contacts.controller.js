@@ -1,17 +1,12 @@
-const {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
-} = require("./contacts");
+
+const { Contact } = require("./contacts.model");
 
 exports.getContactsController = async (req, res) => {
   try {
-    const contacts = await listContacts();
+    const contacts = await Contact.getContacts();
     res.status(200).json(contacts);
   } catch (error) {
-    console.log(error);
+
     res.status(500).send("Bad request");
   }
 };
@@ -20,11 +15,14 @@ exports.getContactByidController = async (req, res) => {
   const { contactId } = req.params;
 
   try {
-    const contacts = await listContacts();
+
+    const contacts = await Contact.getContacts();
     const isIdExist = contacts.find((contact) => contact.id === contactId);
 
     if (isIdExist) {
-      const contact = await getContactById(contactId);
+      const contact = await Contact.getUserById(contactId);
+
+    
       res.status(200).json(contact);
     } else {
       res.status(404).send("Not found");
@@ -36,7 +34,9 @@ exports.getContactByidController = async (req, res) => {
 
 exports.createContactController = async (req, res) => {
   try {
-    const createdContact = await addContact(req.body);
+
+    const createdContact = await Contact.createContact(req.body);
+
     res.status(201).json(createdContact);
   } catch (error) {
     console.log(error);
@@ -65,7 +65,9 @@ exports.updateUserController = async (req, res) => {
     if (Object.keys(req.body).length === 0) {
       return res.status(400).json("missing fields");
     }
-    const updatedContact = await updateContact(req.params.contactId, req.body);
+
+    const updatedContact = await Contact.updateUser(req.body);
+
     if (!updatedContact) {
       res.status(404).json("Not found");
     }

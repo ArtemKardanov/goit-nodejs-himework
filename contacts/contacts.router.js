@@ -7,6 +7,7 @@ const {
   deleteContactController,
   updateUserController,
 } = require("./contacts.controller");
+
 const { contactValidateMiddleware } = require("./contact.validator");
 
 const contactsRouter = express.Router();
